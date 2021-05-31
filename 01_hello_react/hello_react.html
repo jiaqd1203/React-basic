@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- 做移动端适配的，可以删掉 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>hello_react</title>
+</head>
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+
+	<!-- 引入react核心库,有先后顺序的，要先引入核心库再引入周边库  -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+	<!--此处就不能引入babel.min.js这个了，否则错了  -->
+	<script type="text/babel" > /* 此处一定要写babel,用babel翻译jsx，否则默认是js */
+		//1.创建虚拟DOM
+		const VDOM = <h1>Hello,React</h1> /* 此处一定不要写引号，因为不是字符串 */
+		//2.渲染虚拟DOM到页面,ReactDOM.render(虚拟DOM，容器)
+		ReactDOM.render(VDOM,document.getElementById('test'))
+	</script>
+</body>
+</html>
