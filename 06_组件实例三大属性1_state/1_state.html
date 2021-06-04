@@ -14,25 +14,27 @@
 	<script type="text/javascript" src="../js/react-dom.development.js"></script>
 	<!-- 引入babel，用于将jsx转为js -->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
-
+	<!-- 状态里面存着数据，数据的改变就驱动着页面的展示
+		 状态是组件实例对象身上的
+ 	-->
 	<script type="text/babel">
 		//1.创建组件
 		class Weather extends React.Component{
-			
+			// 我想对类的实例对象做一些初始化的操作比如说增加一些属性或者修改一个属性的值，就得借助constructor
 			//构造器调用几次？ ———— 1次
 			constructor(props){
 				console.log('constructor');
 				super(props)
 				//初始化状态
 				this.state = {isHot:false,wind:'微风'}
-				//解决changeWeather中this指向问题
+				//解决changeWeather中this指向问题，加bind就从指向undefined改成了这个实例
 				this.changeWeather = this.changeWeather.bind(this)
 			}
 
 			//render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
 			render(){
 				console.log('render');
-				//读取状态
+				//读取状态做展示
 				const {isHot,wind} = this.state
 				return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
 			}
@@ -46,7 +48,8 @@
 				console.log('changeWeather');
 				//获取原来的isHot值
 				const isHot = this.state.isHot
-				//严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
+				//严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换；比如这个把isHot合并到上面
+				//this.state = {isHot:false,wind:'微风'}而不是替换掉，所以微风还在
 				this.setState({isHot:!isHot})
 				console.log(this);
 

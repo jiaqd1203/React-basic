@@ -38,6 +38,7 @@
 			//重写从父类继承过来的方法
 			speak(){
 				console.log(`我叫${this.name}，我年龄是${this.age},我读的是${this.grade}年级`);
+				// 这里调用study前面必须要加this，因为study()是直接调用，而不是实例调用，this指向的才是实例student
 				this.study()
 			}
 			study(){
